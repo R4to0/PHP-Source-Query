@@ -203,25 +203,25 @@
 		 *
 		 * @return number as a string
 		 */
-		public function PingTime()
+		public function PingTime( )
 		{
 			if( !$this->Connected )
 			{
 				throw new SocketException( 'Not connected.', SocketException::NOT_CONNECTED );
 			}
 
-			$startTime = microtime(true); // Saves first microtime value
+			$startTime = microtime( true ); // Saves first microtime value
 
 			$this->Socket->Write( self::A2S_PING ); // Sends A2S_PING packet
 			$Buffer = $this->Socket->Read( ); // Read reply
 
-			$endTime = microtime(true); // Salva segundo valor microtime
+			$endTime = microtime( true ); // Saves another microtime value
 
 			// If we get the right bits (0x6A) calculate ping time from the two microtime values
 			// Calculation: ($endTime - $startTime) x 1000
-			if ($Buffer->GetByte( ) === self::S2A_PING);
+			if ( $Buffer->GetByte( ) === self::S2A_PING );
 			{
-				return(intval(round(($endTime - $startTime) * 1000)));
+				return( intval( round( ( $endTime - $startTime ) * 1000 ) ) );
 			}
 		}
 
@@ -383,8 +383,8 @@
 				}
 
 				// Ping time -R4to0
-				$serverping = $this->PingTime();
-				if (is_numeric($serverping)) {
+				$serverping = $this->PingTime( );
+				if ( is_numeric( $serverping ) ) {
 					$Server[ 'Ping' ] = $serverping;
 				} 
 				
