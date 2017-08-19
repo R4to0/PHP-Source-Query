@@ -190,7 +190,41 @@
 			
 			return $Buffer->GetByte( ) === self::S2A_PING;
 		}
-		
+
+		/**
+		 * Estimate server ping time
+		 *
+		 * This is a copy of the same function above but instead will return ping in milliseconds.
+		 * Ping is calculated by microtime() PHP function and may be innacurate on slow systems.
+		 * -R4to0
+		 *
+		 * @throws InvalidPacketException
+		 * @throws SocketException
+		 *
+		 * @return number as a string
+		 */
+		public function PingTime()
+		{
+			if( !$this->Connected )
+			{
+				throw new SocketException( 'Not connected.', SocketException::NOT_CONNECTED );
+			}
+
+			$startTime = microtime(true); // Saves first microtime value
+
+			$this->Socket->Write( self::A2S_PING ); // Sends A2S_PING packet
+			$Buffer = $this->Socket->Read( ); // Read reply
+
+			$endTime = microtime(true); // Salva segundo valor microtime
+
+			// If we get the right bits (0x6A) calculate ping time from the two microtime values
+			// Calculation: ($endTime - $startTime) x 1000
+			if ($Buffer->GetByte( ) === self::S2A_PING);
+			{
+				return(intval(round(($endTime - $startTime) * 1000)));
+			}
+		}
+
 		/**
 		 * Get server information
 		 *
@@ -314,7 +348,9 @@
 						}
 						else
 						{
-							throw new \RuntimeException( 'Either 64-bit PHP installation or "gmp" module is required to correctly parse server\'s steamid.' );
+							//throw new \RuntimeException( 'Either 64-bit PHP installation or "gmp" module is required to correctly parse server\'s steamid.' );
+							// Workaround for 32-bit without GMP module. You won't get server SteamID but we get all the other info we want. -R4to0
+							$SteamID = "NO-UNSIGNED-INTEGRER-SUPPORT";
 						}
 					}
 					else
@@ -345,6 +381,12 @@
 				{
 					$Server[ 'GameID' ] = $Buffer->GetUnsignedLong( ) | ( $Buffer->GetUnsignedLong( ) << 32 ); 
 				}
+
+				// Ping time -R4to0
+				$serverping = $this->PingTime();
+				if (is_numeric($serverping)) {
+					$Server[ 'Ping' ] = $serverping;
+				} 
 				
 				if( $Buffer->Remaining( ) > 0 )
 				{
