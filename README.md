@@ -1,7 +1,7 @@
 # PHP Source Query
 
 [![Build Status](https://img.shields.io/travis/xPaw/PHP-Source-Query.svg)](https://travis-ci.org/xPaw/PHP-Source-Query)
-[![Test Coverage](https://img.shields.io/codeclimate/coverage/github/xPaw/PHP-Source-Query.svg)](https://codeclimate.com/github/xPaw/PHP-Source-Query)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/24858a13b82113ad3092/test_coverage)](https://codeclimate.com/github/xPaw/PHP-Source-Query/test_coverage)
 [![Packagist Downloads](https://img.shields.io/packagist/dt/xpaw/php-source-query-class.svg)](https://packagist.org/packages/xpaw/php-source-query-class)
 [![Packagist Version](https://img.shields.io/packagist/v/xpaw/php-source-query-class.svg)](https://packagist.org/packages/xpaw/php-source-query-class)
 
@@ -27,9 +27,9 @@ AppID | Game | Query | RCON | Notes
 ----- | ---- | :---: | :--: | ----
 ~ | All HL1/HL2 games and mods | :white_check_mark: | :white_check_mark: | 
 10 | [Counter-Strike 1.6](http://store.steampowered.com/app/10/) | :white_check_mark: | :white_check_mark: | 
-730 | [Counter-Strike: Global Offensive](http://store.steampowered.com/app/730/) | :white_check_mark: | :white_check_mark: | 
 440 | [Team Fortress 2](http://store.steampowered.com/app/440/) | :white_check_mark: | :white_check_mark: | 
 550 | [Left 4 Dead 2](http://store.steampowered.com/app/550/) | :white_check_mark: | :white_check_mark: | 
+730 | [Counter-Strike: Global Offensive](http://store.steampowered.com/app/730/) | :white_check_mark: | :white_check_mark: | `host_name_store 1; host_info_show 2; host_players_show 2`
 1002 | [Rag Doll Kung Fu](http://store.steampowered.com/app/1002/) | :white_check_mark: | :white_check_mark: | 
 2400 | [The Ship](http://store.steampowered.com/app/2400/) | :white_check_mark: | :white_check_mark: | 
 4000 | [Garry's Mod](http://store.steampowered.com/app/4000/) | :white_check_mark: | :white_check_mark: | 
@@ -42,7 +42,7 @@ AppID | Game | Query | RCON | Notes
 252490 | [Rust](http://store.steampowered.com/app/252490/) | :white_check_mark: | :x: |
 282440 | [Quake Live](http://store.steampowered.com/app/282440) | :white_check_mark: | :x: | Quake Live uses the ZMQ messaging queue protocol for rcon control.
 346110 | [ARK: Survival Evolved](http://store.steampowered.com/app/346110/) | :white_check_mark: | :white_check_mark: | 
- | [Minecraft](http://www.minecraft.net/) | :x: | :white_check_mark: | 
+~ | [Minecraft](http://www.minecraft.net/) | :x: | :white_check_mark: | 
 
 Open a pull request if you know another game which supports Source Query and/or RCON protocols.
 
